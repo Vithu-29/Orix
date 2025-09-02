@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 class TxtTheme {
@@ -51,7 +49,7 @@ class TxtTheme {
     bodySmall: const TextStyle().copyWith(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: Colors.black.withOpacity(0.5),
+      color: Colors.black.withValues(alpha: 0.5),
     ),
 
     labelLarge: const TextStyle().copyWith(
@@ -62,7 +60,7 @@ class TxtTheme {
     labelMedium: const TextStyle().copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: Colors.black.withOpacity(0.5),
+      color: Colors.black.withValues(alpha: 0.5),
     ),
   );
 
@@ -112,7 +110,7 @@ class TxtTheme {
     bodySmall: const TextStyle().copyWith(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: Colors.white.withOpacity(0.5),
+      color: Colors.white.withValues(alpha: 0.5),
     ),
 
     labelLarge: const TextStyle().copyWith(
@@ -123,7 +121,7 @@ class TxtTheme {
     labelMedium: const TextStyle().copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: Colors.white.withOpacity(0.5),
+      color: Colors.white.withValues(alpha: 0.5),
     ),
   );
 }

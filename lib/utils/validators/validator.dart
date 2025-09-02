@@ -1,4 +1,3 @@
-/// VALIDATION CLASS
 class Validator {
   /// Email Validation
   static String? validateEmail(String? value) {

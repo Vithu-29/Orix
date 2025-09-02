@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 class ColorScheme {
@@ -29,7 +27,7 @@ class ColorScheme {
 
   //Background Container Colors
   static const Color lightContainer = Color(0xFFF6F6F6);
-  static Color darkContainer = ColorScheme.white.withOpacity(0.1);
+  static Color darkContainer = ColorScheme.white.withValues(alpha: 0.1);
 
   //Button Colors
   static const Color buttonPrimary = Color(0xFF4B68FF);
