@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ColorScheme {
-  ColorScheme._();
+class ColorsScheme {
+  ColorsScheme._();
 
   //App Basic Colors
   static const Color primary = Color(0xFF4B68FF);
@@ -27,7 +27,7 @@ class ColorScheme {
 
   //Background Container Colors
   static const Color lightContainer = Color(0xFFF6F6F6);
-  static Color darkContainer = ColorScheme.white.withValues(alpha: 0.1);
+  static Color darkContainer = ColorsScheme.white.withValues(alpha: 0.1);
 
   //Button Colors
   static const Color buttonPrimary = Color(0xFF4B68FF);

@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.4.6
   get: ^4.7.2
   get_storage: ^2.1.1
   http: ^1.5.0
