@@ -13,4 +13,8 @@ class ImageStrings {
   static const String onBoardingImage1 = "assets/images/onboarding_images/sammy-line-searching.gif";
   static const String onBoardingImage2 = "assets/images/onboarding_images/sammy-line-shopping.gif";
   static const String onBoardingImage3 = "assets/images/onboarding_images/sammy-line-delivery.gif";
+  
+  //verify email
+  static const String staticSuccessIllustration = "assets/images/email_verify/sammy-line-success.png";
+  static const String deliveredEmailIllustration = "assets/images/email_verify/sammy-line-man-receives-a-mail.png";
 }
