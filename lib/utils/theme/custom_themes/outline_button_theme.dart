@@ -1,3 +1,5 @@
+import 'package:ecommerce_flutter/utils/constants/colors.dart';
+import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class OutlineButtonTheme {
@@ -6,30 +8,30 @@ class OutlineButtonTheme {
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       elevation: 0,
-      foregroundColor: Colors.black,
-      side: const BorderSide(color: Colors.blue),
+      foregroundColor: ColorsScheme.dark,
+      side: const BorderSide(color: ColorsScheme.borderPrimary),
       textStyle: const TextStyle(
         fontSize: 16,
-        color: Colors.black,
+        color: ColorsScheme.black,
         fontWeight: FontWeight.w600,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      padding: const EdgeInsets.symmetric(vertical: Sizes.buttonHeight, horizontal: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Sizes.buttonRadius)),
     ),
   );
 
   static final darkOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       elevation: 0,
-      foregroundColor: Colors.white,
-      side: const BorderSide(color: Colors.blueAccent),
+      foregroundColor: ColorsScheme.light,
+      side: const BorderSide(color: ColorsScheme.borderPrimary),
       textStyle: const TextStyle(
         fontSize: 16,
-        color: Colors.white,
+        color: ColorsScheme.textWhite,
         fontWeight: FontWeight.w600,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      padding: const EdgeInsets.symmetric(vertical: Sizes.buttonHeight, horizontal: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Sizes.buttonRadius)),
     ),
   );
 }

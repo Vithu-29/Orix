@@ -1,3 +1,5 @@
+import 'package:ecommerce_flutter/utils/constants/colors.dart';
+import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class ElevateButtonTheme {
@@ -6,36 +8,36 @@ class ElevateButtonTheme {
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
-      foregroundColor: Colors.white,
-      backgroundColor: Colors.blue,
-      disabledForegroundColor: Colors.grey,
-      disabledBackgroundColor: Colors.grey,
-      side: const BorderSide(color: Colors.blue),
-      padding: const EdgeInsets.symmetric(vertical: 18),
+      foregroundColor: ColorsScheme.light,
+      backgroundColor: ColorsScheme.primary,
+      disabledForegroundColor: ColorsScheme.darkGrey,
+      disabledBackgroundColor: ColorsScheme.buttonDisabled,
+      side: const BorderSide(color: ColorsScheme.primary),
+      padding: const EdgeInsets.symmetric(vertical: Sizes.buttonHeight),
       textStyle: const TextStyle(
         fontSize: 16,
-        color: Colors.white,
+        color: ColorsScheme.textWhite,
         fontWeight: FontWeight.w600,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Sizes.buttonRadius)),
     ),
   );
 
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
-      foregroundColor: Colors.white,
-      backgroundColor: Colors.blue,
-      disabledForegroundColor: Colors.grey,
-      disabledBackgroundColor: Colors.grey,
-      side: const BorderSide(color: Colors.blue),
-      padding: const EdgeInsets.symmetric(vertical: 18),
+      foregroundColor: ColorsScheme.light,
+      backgroundColor: ColorsScheme.primary,
+      disabledForegroundColor: ColorsScheme.darkGrey,
+      disabledBackgroundColor: ColorsScheme.darkerGrey,
+      side: const BorderSide(color: ColorsScheme.primary),
+      padding: const EdgeInsets.symmetric(vertical: Sizes.buttonHeight),
       textStyle: const TextStyle(
         fontSize: 16,
-        color: Colors.white,
+        color: ColorsScheme.textWhite,
         fontWeight: FontWeight.w600,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Sizes.buttonRadius)),
     ),
   );
 }
