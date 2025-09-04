@@ -1,11 +1,13 @@
 import 'package:ecommerce_flutter/common/styles/spacing_style.dart';
 import 'package:ecommerce_flutter/common/widgets/login_signup/form_divider.dart';
 import 'package:ecommerce_flutter/common/widgets/login_signup/social_icons.dart';
+import 'package:ecommerce_flutter/features/authentication/screens/signup.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -96,7 +98,7 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(()=> SignupScreen()),
                 child: Text(TextStrings.createAccount),
               ),
             ),
