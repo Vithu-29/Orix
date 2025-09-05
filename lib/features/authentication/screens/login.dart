@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/common/styles/spacing_style.dart';
 import 'package:ecommerce_flutter/common/widgets/login_signup/form_divider.dart';
 import 'package:ecommerce_flutter/common/widgets/login_signup/social_icons.dart';
+import 'package:ecommerce_flutter/features/authentication/screens/forget_password.dart';
 import 'package:ecommerce_flutter/features/authentication/screens/signup.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               LoginForm(),
               //divider
               FormDivider(dividerText: TextStrings.orSignInWith),
-              const SizedBox(height: Sizes.spaceBtwSections,),
+              const SizedBox(height: Sizes.spaceBtwSections),
               //footer
               SocialButtons(),
             ],
@@ -38,8 +39,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -78,7 +77,7 @@ class LoginForm extends StatelessWidget {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Get.to(() => const ForgetPassword()),
                   child: Text(TextStrings.forgetPassword),
                 ),
               ],
@@ -98,7 +97,7 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () => Get.to(()=> SignupScreen()),
+                onPressed: () => Get.to(() => SignupScreen()),
                 child: Text(TextStrings.createAccount),
               ),
             ),
