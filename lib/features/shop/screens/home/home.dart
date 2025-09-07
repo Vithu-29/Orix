@@ -1,5 +1,8 @@
+import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
+import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/curved_edged_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,7 +15,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             HomePrimaryHeaderContainer(
-              child: Container(),
+              child: Column(
+                children: [
+                  //--App Bar
+                  HomeAppBar(),
+                  //--SearchBar
+                  //--Categories
+                ],
+              ),
             ),
           ],
         ),
@@ -21,10 +31,85 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class HomePrimaryHeaderContainer extends StatelessWidget {
-  const HomePrimaryHeaderContainer({
-    super.key, required this.child,
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({
+    super.key,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppBar(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            TextStrings.homeAppBarTitle,
+            style: Theme.of(context).textTheme.labelMedium!.apply(
+              color: ColorsScheme.grey,
+            ),
+          ),
+          Text(
+            TextStrings.homeAppBarSubTitle,
+            style: Theme.of(context).textTheme.labelSmall!.apply(
+              color: ColorsScheme.white,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        CartCounterIcon(
+          iconColor: ColorsScheme.white,
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+}
+
+class CartCounterIcon extends StatelessWidget {
+  const CartCounterIcon({
+    super.key, required this.onPressed, required this.iconColor,
+  });
+
+  final VoidCallback onPressed ;
+  final Color iconColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        IconButton(
+          onPressed: onPressed,
+          icon: Icon(
+            Iconsax.shopping_bag,
+            color: iconColor,
+          ),
+        ),
+        Positioned(
+          right: 0,
+          child: Container(
+            width: 18,
+            height: 18,
+            decoration: BoxDecoration(
+              color: ColorsScheme.black,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Center(
+              child: Text(
+                "2",
+                style: Theme.of(context).textTheme.labelLarge!
+                    .apply(color: ColorsScheme.white, fontSizeFactor: 0.8),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class HomePrimaryHeaderContainer extends StatelessWidget {
+  const HomePrimaryHeaderContainer({super.key, required this.child});
 
   final Widget child;
 
@@ -40,18 +125,14 @@ class HomePrimaryHeaderContainer extends StatelessWidget {
               top: -150,
               right: -250,
               child: CircularContainer(
-                backgroundColor: ColorsScheme.textWhite.withValues(
-                  alpha: 0.1,
-                ),
+                backgroundColor: ColorsScheme.textWhite.withValues(alpha: 0.1),
               ),
             ),
             Positioned(
               top: 100,
               right: -300,
               child: CircularContainer(
-                backgroundColor: ColorsScheme.textWhite.withValues(
-                  alpha: 0.1,
-                ),
+                backgroundColor: ColorsScheme.textWhite.withValues(alpha: 0.1),
               ),
             ),
             child,
