@@ -1,9 +1,14 @@
 import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
+import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
+import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/curved_edged_widget.dart';
+import '../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
+import '../../../../common/widgets/text_widgets/section_heading.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,8 +24,29 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   //--App Bar
                   HomeAppBar(),
+                  const SizedBox(height: Sizes.spaceBtwSections),
                   //--SearchBar
+                  SearchContainer(text: "Search in Store"),
+                  const SizedBox(height: Sizes.spaceBtwSections),
+
                   //--Categories
+                  Padding(
+                    padding: EdgeInsets.only(left: Sizes.defaultSpace),
+                    child: Column(
+                      children: [
+                        SectionHeading(
+                          title: "Popular Categories",
+                          showTextButton: false,
+                          textColor: ColorsScheme.white,
+                        ),
+
+                        const SizedBox(height: Sizes.spaceBtwItems),
+
+                        HomeCategories(),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: Sizes.spaceBtwSections,)
                 ],
               ),
             ),
@@ -31,10 +57,33 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({
+class HomeCategories extends StatelessWidget {
+  const HomeCategories({
     super.key,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 80,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 6,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (_, index) {
+          return VerticalImageText(
+            image: ImageStrings.shoeIcon,
+            title: "Shoes",
+            onTap: () {},
+          );
+        },
+      ),
+    );
+  }
+}
+
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,23 +93,20 @@ class HomeAppBar extends StatelessWidget {
         children: [
           Text(
             TextStrings.homeAppBarTitle,
-            style: Theme.of(context).textTheme.labelMedium!.apply(
-              color: ColorsScheme.grey,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.labelMedium!.apply(color: ColorsScheme.grey),
           ),
           Text(
             TextStrings.homeAppBarSubTitle,
-            style: Theme.of(context).textTheme.labelSmall!.apply(
-              color: ColorsScheme.white,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall!.apply(color: ColorsScheme.white),
           ),
         ],
       ),
       actions: [
-        CartCounterIcon(
-          iconColor: ColorsScheme.white,
-          onPressed: () {},
-        ),
+        CartCounterIcon(iconColor: ColorsScheme.white, onPressed: () {}),
       ],
     );
   }
@@ -68,10 +114,12 @@ class HomeAppBar extends StatelessWidget {
 
 class CartCounterIcon extends StatelessWidget {
   const CartCounterIcon({
-    super.key, required this.onPressed, required this.iconColor,
+    super.key,
+    required this.onPressed,
+    required this.iconColor,
   });
 
-  final VoidCallback onPressed ;
+  final VoidCallback onPressed;
   final Color iconColor;
 
   @override
@@ -80,10 +128,7 @@ class CartCounterIcon extends StatelessWidget {
       children: [
         IconButton(
           onPressed: onPressed,
-          icon: Icon(
-            Iconsax.shopping_bag,
-            color: iconColor,
-          ),
+          icon: Icon(Iconsax.shopping_bag, color: iconColor),
         ),
         Positioned(
           right: 0,
@@ -97,8 +142,10 @@ class CartCounterIcon extends StatelessWidget {
             child: Center(
               child: Text(
                 "2",
-                style: Theme.of(context).textTheme.labelLarge!
-                    .apply(color: ColorsScheme.white, fontSizeFactor: 0.8),
+                style: Theme.of(context).textTheme.labelLarge!.apply(
+                  color: ColorsScheme.white,
+                  fontSizeFactor: 0.8,
+                ),
               ),
             ),
           ),
