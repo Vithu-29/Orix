@@ -7,6 +7,7 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+  carousel_slider: ^5.1.1
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
@@ -34,6 +35,7 @@ flutter:
     - assets/images/onboarding_images/
     - assets/images/email_verify/
     - assets/icons/category/
+    - assets/images/products/
   
   fonts:
     - family: Poppins
