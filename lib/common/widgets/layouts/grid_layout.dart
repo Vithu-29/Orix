@@ -24,7 +24,7 @@ class GridLayout extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: Sizes.gridViewSpacing,
         crossAxisSpacing: Sizes.gridViewSpacing,
-        mainAxisExtent: 288,
+        mainAxisExtent: mainAxisExtent,
       ),
       itemBuilder: itemBuilder,
     );

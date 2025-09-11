@@ -9,17 +9,19 @@ import '../../../../utils/helpers/helper_functions.dart';
 class SearchContainer extends StatelessWidget {
   const SearchContainer({
     super.key,
-    this.icon = Iconsax.search_normal_1_copy,
+    this.icon = Iconsax.search_normal,
     required this.text,
     this.showBackground = true,
     this.showBorder = true,
     this.onTap,
+    this.padding = const EdgeInsets.symmetric(horizontal: Sizes.defaultSpace),
   });
 
   final IconData? icon;
   final String text;
   final bool showBackground, showBorder;
   final VoidCallback? onTap;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class SearchContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Sizes.defaultSpace),
+        padding: padding,
         child: Container(
           width: DeviceUtility.getScreenWidth(context),
           padding: EdgeInsets.all(Sizes.md),
@@ -43,7 +45,10 @@ class SearchContainer extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, color: ColorsScheme.darkerGrey),
+              Icon(
+                icon,
+                color: dark ? ColorsScheme.darkerGrey : ColorsScheme.grey,
+              ),
               const SizedBox(width: Sizes.spaceBtwItems),
               Text(text, style: Theme.of(context).textTheme.bodySmall),
             ],

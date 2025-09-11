@@ -9,7 +9,6 @@ import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-
 import '../../icons/circular_icon.dart';
 
 class ProductCardVertical extends StatelessWidget {
@@ -100,32 +99,34 @@ class ProductCardVertical extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ProductPriceText(price: "35.0"),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ColorsScheme.dark,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(Sizes.cardRadiusMd),
-                            bottomRight: Radius.circular(
-                              Sizes.productImageRadius,
-                            ),
-                          ),
-                        ),
-                        child: SizedBox(
-                          width: Sizes.iconLg * 1.2,
-                          height: Sizes.iconLg * 1.2,
-                          child: Center(
-                            child: Icon(Iconsax.add, color: ColorsScheme.white),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
+            ),
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: Sizes.sm),
+                  child: ProductPriceText(price: "35.0"),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: ColorsScheme.dark,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(Sizes.cardRadiusMd),
+                      bottomRight: Radius.circular(Sizes.productImageRadius),
+                    ),
+                  ),
+                  child: SizedBox(
+                    width: Sizes.iconLg * 1.2,
+                    height: Sizes.iconLg * 1.2,
+                    child: Center(
+                      child: Icon(Iconsax.add, color: ColorsScheme.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
