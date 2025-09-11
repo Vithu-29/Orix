@@ -1,17 +1,18 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
-import 'package:ecommerce_flutter/features/shop/controllers/home_controller.dart';
+import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
+import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import '../../../../common/widgets/custom_shapes/containers/circular_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/curved_edged_widget.dart';
 import '../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
 import '../../../../common/widgets/text_widgets/section_heading.dart';
+import 'widgets/promo_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -56,111 +57,25 @@ class HomeScreen extends StatelessWidget {
             //Caroussel slider
             Padding(
               padding: const EdgeInsets.all(Sizes.defaultSpace),
-              child: PromoSlider(banners: [
-                ImageStrings.promoBanner1,
-                ImageStrings.promoBanner2,
-                ImageStrings.promoBanner3,
-              ],),
+              child: Column(
+                children: [
+                  PromoSlider(
+                    banners: [
+                      ImageStrings.promoBanner1,
+                      ImageStrings.promoBanner2,
+                      ImageStrings.promoBanner3,
+                    ],
+                  ),
+                  const SizedBox(height: Sizes.spaceBtwSections),
+                  //Popular products
+                  GridLayout(
+                    itemCount: 6,
+                    itemBuilder: (_, index) => const ProductCardVertical(),
+                  ),
+                ],
+              ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class PromoSlider extends StatelessWidget {
-  const PromoSlider({super.key, required this.banners});
-
-  final List<String> banners;
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
-    return Column(
-      children: [
-        CarouselSlider(
-          items: banners.map((url) => RoundedImage(imageUrl: url)).toList(),
-          options: CarouselOptions(
-            autoPlay: true,
-            viewportFraction: 1,
-            onPageChanged: (index, _) => controller.updatePageIndicator(index),
-          ),
-        ),
-        const SizedBox(height: Sizes.spaceBtwItems),
-        Center(
-          child: Obx(
-            () => Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (int i = 0; i < banners.length; i++)
-                  CircularContainer(
-                    width: 20,
-                    height: 4,
-                    backgroundColor: controller.carouselCurrentIndex.value == i
-                        ? ColorsScheme.primary
-                        : ColorsScheme.grey,
-                    margin: EdgeInsets.only(right: 10),
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class RoundedImage extends StatelessWidget {
-  const RoundedImage({
-    super.key,
-    this.height,
-    this.width,
-    required this.imageUrl,
-    this.applyImageRadius = true,
-    this.border,
-    this.backgroundColor = ColorsScheme.light,
-    this.fit = BoxFit.contain,
-    this.padding,
-    this.isNetworkImage = false,
-    this.onPressed,
-    this.borderRadius = Sizes.md,
-  });
-
-  final double? height, width;
-  final String imageUrl;
-  final bool applyImageRadius;
-  final BoxBorder? border;
-  final Color backgroundColor;
-  final BoxFit? fit;
-  final EdgeInsetsGeometry? padding;
-  final bool isNetworkImage;
-  final VoidCallback? onPressed;
-  final double borderRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: height,
-        width: width,
-        padding: padding,
-        decoration: BoxDecoration(
-          border: border,
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        child: ClipRRect(
-          borderRadius: applyImageRadius
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
-          child: Image(
-            image: isNetworkImage
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
-            fit: fit,
-          ),
         ),
       ),
     );
@@ -294,42 +209,6 @@ class HomePrimaryHeaderContainer extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CircularContainer extends StatelessWidget {
-  const CircularContainer({
-    super.key,
-    this.height = 400,
-    this.width = 400,
-    this.radius = 400,
-    this.margin,
-    this.padding = 0,
-    this.child,
-    this.backgroundColor = ColorsScheme.white,
-  });
-
-  final double? height;
-  final double? width;
-  final double radius;
-  final double padding;
-  final Widget? child;
-  final Color backgroundColor;
-  final EdgeInsets? margin;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      margin: margin,
-      padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
-        color: backgroundColor,
-      ),
-      child: child,
     );
   }
 }
