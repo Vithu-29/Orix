@@ -1,5 +1,7 @@
+import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/device/device_utility.dart';
+import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -29,7 +31,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: showBackArrow
             ? IconButton(
                 onPressed: () => Get.back(),
-                icon: Icon(Iconsax.arrow_left),
+                icon: Icon(
+                  Iconsax.arrow_left_2_copy,
+                  color: HelperFunctions.isDarkMode(context)
+                      ? ColorsScheme.white
+                      : ColorsScheme.black,
+                ),
               )
             : leadingIcon != null
             ? IconButton(onPressed: leadingOnPressed, icon: Icon(leadingIcon))
