@@ -32,7 +32,7 @@ class RatingAndShareButton extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {},
-          icon: const Icon(Iconsax.share, size: Sizes.iconMd),
+          icon: const Icon(Iconsax.share_copy, size: Sizes.iconMd),
         ),
       ],
     );
