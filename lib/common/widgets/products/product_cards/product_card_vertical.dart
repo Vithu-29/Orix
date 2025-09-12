@@ -3,11 +3,13 @@ import 'package:ecommerce_flutter/common/widgets/custom_shapes/containers/rounde
 import 'package:ecommerce_flutter/common/widgets/image_shapes/rounded_image.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/product_price_text.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/product_title_text.dart';
+import 'package:ecommerce_flutter/features/shop/screens/product_details/product_detail.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../icons/circular_icon.dart';
 
@@ -18,7 +20,7 @@ class ProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
