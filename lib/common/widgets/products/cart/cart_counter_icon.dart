@@ -38,7 +38,7 @@ class CartCounterIcon extends StatelessWidget {
               child: Text(
                 "2",
                 style: Theme.of(context).textTheme.labelLarge!.apply(
-                  color: ColorsScheme.white,
+                  color: dark ? ColorsScheme.black: ColorsScheme.white,
                   fontSizeFactor: 0.8,
                 ),
               ),

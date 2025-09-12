@@ -75,31 +75,34 @@ class ProductCardVertical extends StatelessWidget {
             //details
             Padding(
               padding: EdgeInsets.only(left: Sizes.sm),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProductTitleText(
-                    title: "Green Nike Air Shoes",
-                    smallSize: true,
-                  ),
-                  SizedBox(height: Sizes.spaceBtwItems / 2),
-                  Row(
-                    children: [
-                      Text(
-                        "Nike",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      const SizedBox(width: Sizes.xs),
-                      Icon(
-                        Iconsax.verify,
-                        color: ColorsScheme.primary,
-                        size: Sizes.iconXs,
-                      ),
-                    ],
-                  ),
-                ],
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProductTitleText(
+                      title: "Green Nike Air Shoes",
+                      smallSize: true,
+                    ),
+                    SizedBox(height: Sizes.spaceBtwItems / 2),
+                    Row(
+                      children: [
+                        Text(
+                          "Nike",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        const SizedBox(width: Sizes.xs),
+                        Icon(
+                          Iconsax.verify,
+                          color: ColorsScheme.primary,
+                          size: Sizes.iconXs,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Spacer(),
