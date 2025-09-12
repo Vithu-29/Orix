@@ -6,9 +6,8 @@ import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
-import '../../../../common/widgets/custom_shapes/containers/circular_container.dart';
+import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
-import '../../../../common/widgets/custom_shapes/curved_edges/curved_edged_widget.dart';
 import '../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
 import '../../../../common/widgets/products/cart/cart_counter_icon.dart';
 import '../../../../common/widgets/text_widgets/section_heading.dart';
@@ -137,37 +136,3 @@ class HomeAppBar extends StatelessWidget {
   }
 }
 
-class HomePrimaryHeaderContainer extends StatelessWidget {
-  const HomePrimaryHeaderContainer({super.key, required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return CurvedEdgedWidget(
-      child: Container(
-        color: ColorsScheme.primary,
-        padding: EdgeInsets.only(bottom: 0),
-        child: Stack(
-          children: [
-            Positioned(
-              top: -150,
-              right: -250,
-              child: CircularContainer(
-                backgroundColor: ColorsScheme.textWhite.withValues(alpha: 0.1),
-              ),
-            ),
-            Positioned(
-              top: 100,
-              right: -300,
-              child: CircularContainer(
-                backgroundColor: ColorsScheme.textWhite.withValues(alpha: 0.1),
-              ),
-            ),
-            child,
-          ],
-        ),
-      ),
-    );
-  }
-}
