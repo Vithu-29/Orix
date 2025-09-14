@@ -21,7 +21,7 @@ class WishlistScreen extends StatelessWidget {
         ),
         actions: [
           CircularIcon(
-            icon: Iconsax.add,
+            icon: Iconsax.add_copy,
             onPressed: () => Get.to(const HomeScreen()),
           ),
         ],
