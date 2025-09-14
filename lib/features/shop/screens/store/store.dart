@@ -26,7 +26,9 @@ class StoreScreen extends StatelessWidget {
             "Store",
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: [CartCounterIcon(onPressed: () {})],
+          actions: [
+            CartCounterIcon(),
+          ],
         ),
 
         //body
@@ -90,7 +92,7 @@ class StoreScreen extends StatelessWidget {
               CategoryTab(),
               CategoryTab(),
               CategoryTab(),
-              CategoryTab()
+              CategoryTab(),
             ],
           ),
         ),

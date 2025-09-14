@@ -129,10 +129,7 @@ class HomeAppBar extends StatelessWidget {
           ),
         ],
       ),
-      actions: [
-        CartCounterIcon(iconColor: ColorsScheme.white, onPressed: () {}),
-      ],
+      actions: [CartCounterIcon(iconColor: ColorsScheme.white)],
     );
   }
 }
-
