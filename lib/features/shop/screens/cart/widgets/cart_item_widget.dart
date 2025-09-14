@@ -32,27 +32,38 @@ class CartItemWidget extends StatelessWidget {
             Flexible(
               child: ProductTitleText(title: "Black Sports Shoe", maxLines: 1),
             ),
-            Text.rich(
-              TextSpan(
-                children: [
+            Row(
+              children: [
+                Text.rich(
                   TextSpan(
-                    text: "Color",
-                    style: Theme.of(context).textTheme.bodySmall,
+                    children: [
+                      TextSpan(
+                        text: "Color ",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      TextSpan(
+                        text: "Green",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
                   ),
+                ),
+                const SizedBox(width: Sizes.spaceBtwItems / 2,),
+                Text.rich(
                   TextSpan(
-                    text: "Green",
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: [
+                      TextSpan(
+                        text: "Size ",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      TextSpan(
+                        text: "EU 34",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: "Size",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  TextSpan(
-                    text: "EU 34",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

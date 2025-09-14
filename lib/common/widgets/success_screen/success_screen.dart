@@ -5,9 +5,15 @@ import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key, required this.image, required this.title, required this.subTitle, required this.onPressed});
+  const SuccessScreen({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.subTitle,
+    required this.onPressed,
+  });
 
-  final String image,title,subTitle;
+  final String image, title, subTitle;
   final VoidCallback onPressed;
 
   @override
