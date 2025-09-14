@@ -2,8 +2,10 @@ import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.da
 import 'package:ecommerce_flutter/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:ecommerce_flutter/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:ecommerce_flutter/features/shop/screens/product_details/widgets/product_meta_data.dart';
+import 'package:ecommerce_flutter/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import 'widgets/detail_product_slider.dart';
 import 'widgets/rating_and_share_buton.dart';
@@ -72,7 +74,10 @@ class ProductDetailScreen extends StatelessWidget {
                   //reviews
                   const Divider(),
                   const SizedBox(height: Sizes.spaceBtwItems),
-                  SectionHeading(title: "Reviews(199)", onPressed: () {}),
+                  SectionHeading(
+                    title: "Reviews(199)",
+                    onPressed: () => Get.to(() => const ProductReviews()),
+                  ),
                   const SizedBox(height: Sizes.spaceBtwSections),
                 ],
               ),
