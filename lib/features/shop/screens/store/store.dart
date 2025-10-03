@@ -3,11 +3,13 @@ import 'package:ecommerce_flutter/common/widgets/app_bar/tab_bar.dart';
 import 'package:ecommerce_flutter/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.dart';
+import 'package:ecommerce_flutter/features/shop/screens/all_brands/all_brands_screen.dart';
 import 'package:ecommerce_flutter/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../common/widgets/brands/brand_card.dart';
 import '../../../../common/widgets/products/cart/cart_counter_icon.dart';
 
@@ -26,9 +28,7 @@ class StoreScreen extends StatelessWidget {
             "Store",
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: [
-            CartCounterIcon(),
-          ],
+          actions: [CartCounterIcon()],
         ),
 
         //body
@@ -39,7 +39,7 @@ class StoreScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 pinned: true,
                 floating: true,
-                backgroundColor: dark ? ColorsScheme.black : ColorsScheme.white,
+                backgroundColor: dark ? Colors.transparent : ColorsScheme.white,
                 expandedHeight: 440,
 
                 flexibleSpace: Padding(
@@ -59,7 +59,7 @@ class StoreScreen extends StatelessWidget {
                       //brands
                       SectionHeading(
                         title: "Featured Brands",
-                        onPressed: () {},
+                        onPressed: () => Get.to(() => const AllBrandsScreen()),
                       ),
                       const SizedBox(height: Sizes.spaceBtwItems / 1.5),
 

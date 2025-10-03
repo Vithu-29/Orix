@@ -13,7 +13,7 @@ class CategoryTabBar extends StatelessWidget implements PreferredSizeWidget {
     final dark = HelperFunctions.isDarkMode(context);
 
     return Material(
-      color: dark ? ColorsScheme.black : ColorsScheme.white,
+      color: dark ? Colors.transparent : ColorsScheme.white,
       child: TabBar(
         tabs: tabs,
         tabAlignment: TabAlignment.start,
