@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:ecommerce_flutter/features/shop/screens/all_products/all_products_screen.dart';
 import 'package:ecommerce_flutter/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
@@ -69,7 +70,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: Sizes.spaceBtwSections),
                   //Popular products
-                  SectionHeading(title: "Popular Products", onPressed: () {}),
+                  SectionHeading(
+                    title: "Popular Products",
+                    onPressed: () => Get.to(() => const AllProductsScreen()),
+                  ),
                   const SizedBox(height: Sizes.spaceBtwItems),
                   GridLayout(
                     itemCount: 6,
