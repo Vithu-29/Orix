@@ -2,7 +2,7 @@ import 'package:ecommerce_flutter/common/styles/spacing_style.dart';
 import 'package:ecommerce_flutter/common/widgets/login_signup/form_divider.dart';
 import 'package:ecommerce_flutter/common/widgets/login_signup/social_icons.dart';
 import 'package:ecommerce_flutter/features/authentication/screens/forget_password.dart';
-import 'package:ecommerce_flutter/features/authentication/screens/signup.dart';
+import 'package:ecommerce_flutter/features/authentication/screens/signup/signup.dart';
 import 'package:ecommerce_flutter/navigation_menu.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';

@@ -1,6 +1,6 @@
 name: ecommerce_flutter
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -8,7 +8,10 @@ environment:
 
 dependencies:
   carousel_slider: ^5.1.1
+  cloud_firestore: ^6.1.0
+  connectivity_plus: ^7.0.0
   cupertino_icons: ^1.0.8
+  firebase_auth: ^6.1.2
   firebase_core: ^4.2.1
   flutter:
     sdk: flutter
@@ -20,6 +23,7 @@ dependencies:
   iconsax_flutter: ^1.0.1
   intl: ^0.20.2
   logger: ^2.6.1
+  lottie: ^3.3.2
   readmore: ^3.0.0
   smooth_page_indicator: ^1.2.1
   url_launcher: ^6.3.2
@@ -36,6 +40,7 @@ flutter:
     - assets/logos/
     - assets/icons/brands/
     - assets/images/onboarding_images/
+    - assets/images/animations/
     - assets/images/email_verify/
     - assets/icons/category/
     - assets/images/products/
@@ -43,7 +48,7 @@ flutter:
     - assets/images/user/
     - assets/images/reviews/
     - assets/icons/payment_methods/
-  
+
   fonts:
     - family: Poppins
       fonts:
