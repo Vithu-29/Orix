@@ -2,7 +2,6 @@ import 'package:ecommerce_flutter/main_app.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-
   //Todo: Add Widgets Binding
   //Todo: Init Local Storage
   //Todo: Await Native splash
@@ -11,4 +10,3 @@ void main() {
 
   runApp(const MainApp());
 }
-
