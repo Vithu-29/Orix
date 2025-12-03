@@ -1,4 +1,4 @@
-import 'package:ecommerce_flutter/features/authentication/screens/onboarding.dart';
+import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,11 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const OnboardingScreen(),
+      // Show loader meanwhile Auth Repository is deciding to show relavant screen
+      home: const Scaffold(
+        backgroundColor: ColorsScheme.primary,
+        body: Center(child: CircularProgressIndicator(color: Colors.white)),
+      ),
     );
   }
 }
