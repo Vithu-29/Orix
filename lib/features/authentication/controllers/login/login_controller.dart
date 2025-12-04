@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/data/repositories/authentication/authentication_repository.dart';
+import 'package:ecommerce_flutter/features/personalization/controllers/user_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +15,7 @@ class LoginController extends GetxController {
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final hidePassword = true.obs;
   final rememberMe = false.obs;
+  final userController = Get.put(UserController());
 
   @override
   void onInit() {
@@ -58,6 +60,43 @@ class LoginController extends GetxController {
       FullScreenLoader.stopLoading();
 
       //redirect user
+      AuthenticationRepository.instance.screenRedirect();
+    } catch (e) {
+      //remove loading
+      FullScreenLoader.stopLoading();
+
+      //show error message
+      Loaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
+    }
+  }
+
+  //google signin
+  Future<void> googleSignIn() async {
+    try {
+      //start loading
+      FullScreenLoader.openLoadingDialog(
+        "Logging you in...",
+        ImageStrings.docerAnimation,
+      );
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      //google authentication
+      final userCredentials = await AuthenticationRepository.instance
+          .signInWithGoogle();
+
+      //save user record
+      await userController.saveUserRecord(userCredentials);
+
+      //remove loading
+      FullScreenLoader.stopLoading();
+
+      //redirect
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       //remove loading

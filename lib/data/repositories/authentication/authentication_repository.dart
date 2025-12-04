@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
@@ -109,12 +110,46 @@ class AuthenticationRepository extends GetxController {
   //Email authentication - forgot password
 
   //google sign in
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      //Trigger the authentication flow
+      await GoogleSignIn.instance.initialize();
+      // ignore: unnecessary_nullable_for_final_variable_declarations
+      final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
+          .authenticate();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          // ignore: await_only_futures
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw DefinedFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DefinedFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DefinedFormatException();
+    } on PlatformException catch (e) {
+      throw DefinedPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again later.";
+    }
+  }
+
   //facebook sign in
 
   //logout user
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
+      await GoogleSignIn.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw DefinedFirebaseAuthException(e.code).message;
