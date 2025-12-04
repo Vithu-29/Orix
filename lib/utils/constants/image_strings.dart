@@ -65,7 +65,7 @@ class ImageStrings {
   static String securityAnimation =
       "assets/images/animations/67263-security-icon-transparent.json";
   static String successfullyRegisterAnimation =
-      "assets/images/animations/72462-check-register.json";
+      "assets/images/animations/Success-Check.json";
   static String thankYouAnimation =
       "assets/images/animations/104368-thank-you.json";
   static String loadingJuggleAnimation =

@@ -45,6 +45,7 @@ class SignupController extends GetxController {
 
       //privacy policy check
       if (!privacyPolicy.value) {
+        FullScreenLoader.stopLoading();
         Loaders.warningSnackBar(
           title: "Accept Privacy Policy",
           message:
@@ -85,7 +86,7 @@ class SignupController extends GetxController {
       );
 
       //move to email verification screen
-      Get.to(() => const VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
     } catch (e) {
       //remove loading
       FullScreenLoader.stopLoading();

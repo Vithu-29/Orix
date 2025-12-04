@@ -1,5 +1,7 @@
 import 'package:ecommerce_flutter/features/authentication/screens/login.dart';
 import 'package:ecommerce_flutter/features/authentication/screens/onboarding.dart';
+import 'package:ecommerce_flutter/features/authentication/screens/signup/verify_email.dart';
+import 'package:ecommerce_flutter/navigation_menu.dart';
 import 'package:ecommerce_flutter/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -26,10 +28,19 @@ class AuthenticationRepository extends GetxController {
 
   //function to show relevant screen
   screenRedirect() async {
-    deviceStorage.writeIfNull("isFirstTime", true);
-    deviceStorage.read("isFirstTime") != true
-        ? Get.offAll(() => const LoginScreen())
-        : Get.offAll(() => const OnboardingScreen());
+    final user = _auth.currentUser;
+    if (user != null) {
+      if (user.emailVerified) {
+        Get.offAll(() => const NavigationMenu());
+      } else {
+        Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser!.email));
+      }
+    } else {
+      deviceStorage.writeIfNull("isFirstTime", true);
+      deviceStorage.read("isFirstTime") != true
+          ? Get.offAll(() => const LoginScreen())
+          : Get.offAll(() => const OnboardingScreen());
+    }
   }
 
   //Email auth - Signin
@@ -55,13 +66,46 @@ class AuthenticationRepository extends GetxController {
       throw "Something went wrong. Please try again later.";
     }
   }
+
   //Re-authenticate
   //Email verification
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw DefinedFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DefinedFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DefinedFormatException();
+    } on PlatformException catch (e) {
+      throw DefinedPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again later.";
+    }
+  }
   //Email authentication - forgot password
 
   //google sign in
   //facebook sign in
 
   //logout user
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw DefinedFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DefinedFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DefinedFormatException();
+    } on PlatformException catch (e) {
+      throw DefinedPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again later.";
+    }
+  }
+
   //delete user
 }
