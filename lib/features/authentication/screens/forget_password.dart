@@ -1,6 +1,7 @@
-import 'package:ecommerce_flutter/features/authentication/screens/reset_password.dart';
+import 'package:ecommerce_flutter/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
+import 'package:ecommerce_flutter/utils/validators/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -10,6 +11,7 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -30,10 +32,15 @@ class ForgetPassword extends StatelessWidget {
               const SizedBox(height: Sizes.spaceBtwSections * 2),
 
               //Text field
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: TextStrings.email,
-                  prefixIcon: Icon(Iconsax.direct_right),
+              Form(
+                key: controller.forgetPasswordFormKey,
+                child: TextFormField(
+                  controller: controller.email,
+                  validator: (value) => Validator.validateEmail(value),
+                  decoration: const InputDecoration(
+                    labelText: TextStrings.email,
+                    prefixIcon: Icon(Iconsax.direct_right),
+                  ),
                 ),
               ),
               const SizedBox(height: Sizes.spaceBtwSections),
@@ -42,7 +49,7 @@ class ForgetPassword extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => Get.off(() => const ResetPassword()),
+                  onPressed: () => controller.sendPasswordResetEmail(),
                   child: const Text(TextStrings.submit),
                 ),
               ),

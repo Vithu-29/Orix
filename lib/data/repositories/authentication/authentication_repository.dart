@@ -4,6 +4,7 @@ import 'package:ecommerce_flutter/features/authentication/screens/signup/verify_
 import 'package:ecommerce_flutter/navigation_menu.dart';
 import 'package:ecommerce_flutter/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -90,7 +91,6 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  //Re-authenticate
   //Email verification
   Future<void> sendEmailVerification() async {
     try {
@@ -107,7 +107,23 @@ class AuthenticationRepository extends GetxController {
       throw "Something went wrong. Please try again later.";
     }
   }
+
   //Email authentication - forgot password
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw DefinedFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DefinedFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DefinedFormatException();
+    } on PlatformException catch (e) {
+      throw DefinedPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again later.";
+    }
+  }
 
   //google sign in
   Future<UserCredential?> signInWithGoogle() async {
@@ -139,7 +155,8 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw DefinedPlatformException(e.code).message;
     } catch (e) {
-      throw "Something went wrong. Please try again later.";
+      if (kDebugMode) print("Something went wrong: $e");
+      return null;
     }
   }
 
