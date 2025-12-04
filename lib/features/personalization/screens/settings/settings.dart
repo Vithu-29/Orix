@@ -2,7 +2,7 @@ import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:ecommerce_flutter/common/widgets/list_tile/settings_menu_tile.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.dart';
-import 'package:ecommerce_flutter/features/authentication/screens/login.dart';
+import 'package:ecommerce_flutter/data/repositories/authentication/authentication_repository.dart';
 import 'package:ecommerce_flutter/features/personalization/screens/address/user_address.dart';
 import 'package:ecommerce_flutter/features/shop/screens/orders/order_list_screen.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
@@ -121,7 +121,8 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () => Get.to(() => const LoginScreen()),
+                      onPressed: () =>
+                          AuthenticationRepository.instance.logout(),
                       child: Text("Logout"),
                     ),
                   ),
