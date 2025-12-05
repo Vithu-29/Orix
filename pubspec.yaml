@@ -15,6 +15,7 @@ dependencies:
   firebase_core: ^4.2.1
   flutter:
     sdk: flutter
+  flutter_dotenv: ^6.0.0
   flutter_native_splash: ^2.4.6
   flutter_rating_bar: ^4.0.1
   get: ^4.7.2
@@ -22,12 +23,14 @@ dependencies:
   google_sign_in: ^7.2.0
   http: ^1.5.0
   iconsax_flutter: ^1.0.1
+  image_picker: ^1.2.1
   intl: ^0.20.2
   logger: ^2.6.1
   lottie: ^3.3.2
   readmore: ^3.0.0
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.1
+  supabase_flutter: ^2.10.3
   url_launcher: ^6.3.2
 
 dev_dependencies:
