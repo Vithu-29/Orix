@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:ecommerce_flutter/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce_flutter/features/shop/screens/all_products/all_products_screen.dart';
 import 'package:ecommerce_flutter/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
+import '../../../../common/widgets/loaders/shimmer_effect_loader.dart';
 import '../../../../common/widgets/products/cart/cart_counter_icon.dart';
 import '../../../../common/widgets/text_widgets/section_heading.dart';
 import 'widgets/promo_slider.dart';
@@ -117,6 +119,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return CustomAppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,12 +130,18 @@ class HomeAppBar extends StatelessWidget {
               context,
             ).textTheme.labelMedium!.apply(color: ColorsScheme.grey),
           ),
-          Text(
-            TextStrings.homeAppBarSubTitle,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall!.apply(color: ColorsScheme.white),
-          ),
+          Obx(() {
+            if (controller.profileLoading.value) {
+              return ShimmerEffectLoader(width: 80, height: 15);
+            } else {
+              return Text(
+                controller.user.value.fullName,
+                style: Theme.of(
+                  context,
+                ).textTheme.headlineSmall!.apply(color: ColorsScheme.white),
+              );
+            }
+          }),
         ],
       ),
       actions: [CartCounterIcon(iconColor: ColorsScheme.white)],

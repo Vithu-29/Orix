@@ -1,13 +1,49 @@
+import 'package:ecommerce_flutter/data/repositories/authentication/authentication_repository.dart';
 import 'package:ecommerce_flutter/data/repositories/user/user_repository.dart';
+import 'package:ecommerce_flutter/features/authentication/screens/login.dart';
 import 'package:ecommerce_flutter/features/personalization/models/user_model.dart';
+import 'package:ecommerce_flutter/features/personalization/screens/profile/delete_account_screen.dart';
 import 'package:ecommerce_flutter/utils/popups/loaders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/constants/image_strings.dart';
+import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/network_manager.dart';
+import '../../../utils/popups/full_screen_loader.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
   final userRepository = Get.put(UserRepository());
+  Rx<UserModel> user = UserModel.empty().obs;
+  final profileLoading = false.obs;
+
+  final hidePassword = true.obs;
+  final verifyEmail = TextEditingController();
+  final verifyPassword = TextEditingController();
+  GlobalKey<FormState> reAuthFormKey = GlobalKey<FormState>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchUserRecord();
+  }
+
+  //fetch user deatails
+  Future<void> fetchUserRecord() async {
+    try {
+      profileLoading.value = true;
+      final user = await userRepository.fetchUserDetails();
+      this.user(user);
+      profileLoading.value = false;
+    } catch (e) {
+      user(UserModel.empty());
+    } finally {
+      profileLoading.value = false;
+    }
+  }
 
   //save user record from any Registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
@@ -41,6 +77,110 @@ class UserController extends GetxController {
         message:
             "Something went wrong while saving your information. You can re-save your data in your profile",
       );
+    }
+  }
+
+  //Delete account warning
+  void deleteAccountWarningPopup() {
+    Get.defaultDialog(
+      contentPadding: const EdgeInsets.all(Sizes.md),
+      title: "Delete Account",
+      middleText:
+          "Are you sure you want to delete your account permanently? This action is not reversible and all of your data will be removed permanently.",
+      confirm: ElevatedButton(
+        onPressed: () async => deleteUserAccount(),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          side: const BorderSide(color: Colors.red),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: Sizes.lg),
+          child: Text("Delete"),
+        ),
+      ),
+      cancel: OutlinedButton(
+        onPressed: () => Navigator.of(Get.overlayContext!).pop(),
+        child: const Text("Cancel"),
+      ),
+    );
+  }
+
+  //delete user account
+  void deleteUserAccount() async {
+    try {
+      FullScreenLoader.openLoadingDialog(
+        "Processing...",
+        ImageStrings.docerAnimation,
+      );
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      //re-auth user
+      final auth = AuthenticationRepository.instance;
+      final provider = auth.authUser!.providerData
+          .map((e) => e.providerId)
+          .first;
+      if (provider.isNotEmpty) {
+        if (provider == "google.com") {
+          await auth.signInWithGoogle();
+          await auth.deleteAccount();
+          FullScreenLoader.stopLoading();
+          Get.offAll(() => const LoginScreen());
+        } else if (provider == "password") {
+          FullScreenLoader.stopLoading();
+          Get.to(() => DeleteAccountScreen());
+        }
+      }
+    } catch (e) {
+      //remove loading
+      FullScreenLoader.stopLoading();
+
+      //show error message
+      Loaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
+    }
+  }
+
+  //Re-authenticate before delete
+  Future<void> reAuthenticateEmailAndPasswordUser() async {
+    try {
+      FullScreenLoader.openLoadingDialog(
+        "Processing...",
+        ImageStrings.docerAnimation,
+      );
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      //validate form
+      if (!reAuthFormKey.currentState!.validate()) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      await AuthenticationRepository.instance
+          .reAuthenticateWithEmailAndPassword(
+            verifyEmail.text.trim(),
+            verifyPassword.text.trim(),
+          );
+      await AuthenticationRepository.instance.deleteAccount();
+
+      FullScreenLoader.stopLoading();
+      Get.offAll(() => const LoginScreen());
+    } catch (e) {
+      //remove loading
+      FullScreenLoader.stopLoading();
+
+      //show error message
+      Loaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
     }
   }
 }

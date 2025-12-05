@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/data/repositories/user/user_repository.dart';
 import 'package:ecommerce_flutter/features/authentication/screens/login.dart';
 import 'package:ecommerce_flutter/features/authentication/screens/onboarding.dart';
 import 'package:ecommerce_flutter/features/authentication/screens/signup/verify_email.dart';
@@ -20,6 +21,9 @@ class AuthenticationRepository extends GetxController {
 
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+
+  //Get authendicated user data
+  User? get authUser => _auth.currentUser;
 
   //called from main.dart on app launch
   @override
@@ -181,5 +185,45 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  //re authenticate user
+  Future<void> reAuthenticateWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      AuthCredential credential = EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      );
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw DefinedFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DefinedFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DefinedFormatException();
+    } on PlatformException catch (e) {
+      throw DefinedPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again later.";
+    }
+  }
+
   //delete user
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw DefinedFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw DefinedFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const DefinedFormatException();
+    } on PlatformException catch (e) {
+      throw DefinedPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again later.";
+    }
+  }
 }
