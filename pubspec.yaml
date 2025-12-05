@@ -7,6 +7,7 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+  cached_network_image: ^3.4.1
   carousel_slider: ^5.1.1
   cloud_firestore: ^6.1.0
   connectivity_plus: ^7.0.0
@@ -42,6 +43,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - .env
     - assets/logos/
     - assets/icons/brands/
     - assets/images/onboarding_images/

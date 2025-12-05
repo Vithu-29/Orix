@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_flutter/data/repositories/authentication/authentication_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../features/personalization/models/user_model.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
@@ -101,17 +105,32 @@ class UserRepository extends GetxController {
   }
 
   //upload any image
-  Future<String> uploadImage(String path, XFile image) {
+  Future<String> uploadImage(String bucket, XFile image) async {
     try {
-      //
-    } on FirebaseException catch (e) {
-      throw DefinedFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const DefinedFormatException();
-    } on PlatformException catch (e) {
-      throw DefinedPlatformException(e.code).message;
+      final fileName = "${DateTime.now().millisecondsSinceEpoch}_${image.name}";
+
+      // Upload the file
+      final response = await Supabase.instance.client.storage
+          .from(bucket)
+          .upload(
+            fileName,
+            File(image.path),
+            fileOptions: const FileOptions(upsert: false),
+          );
+
+      if (response.isEmpty) {
+        throw 'Upload failed';
+      }
+
+      // Get public URL
+      final publicUrl = Supabase.instance.client.storage
+          .from(bucket)
+          .getPublicUrl(fileName);
+
+      return publicUrl;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      debugPrint("SUPABASE UPLOAD ERROR: $e");
+      rethrow;
     }
   }
 }

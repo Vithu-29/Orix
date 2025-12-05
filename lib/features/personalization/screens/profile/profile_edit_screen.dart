@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/common/widgets/image_shapes/circular_image.dart';
+import 'package:ecommerce_flutter/common/widgets/loaders/shimmer_effect_loader.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.dart';
 import 'package:ecommerce_flutter/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce_flutter/features/personalization/screens/profile/widgets/change_name.dart';
@@ -24,9 +25,28 @@ class ProfileEditScreen extends StatelessWidget {
           width: double.infinity,
           child: Column(
             children: [
-              CircularImage(image: ImageStrings.user, width: 80, height: 80),
+              Obx(() {
+                final networkImage = controller.user.value.profilePicture;
+                final image = networkImage.isNotEmpty
+                    ? networkImage
+                    : ImageStrings.user;
+                if (controller.imageUploading.value) {
+                  return const ShimmerEffectLoader(
+                    width: 80,
+                    height: 80,
+                    radius: 80,
+                  );
+                } else {
+                  return CircularImage(
+                    image: image,
+                    width: 80,
+                    height: 80,
+                    isNetworkImage: networkImage.isNotEmpty,
+                  );
+                }
+              }),
               TextButton(
-                onPressed: () {},
+                onPressed: () => controller.uploadUserProfilePicture(),
                 child: Text("Change Profile Picture"),
               ),
 
