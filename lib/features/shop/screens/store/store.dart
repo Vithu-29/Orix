@@ -3,6 +3,7 @@ import 'package:ecommerce_flutter/common/widgets/app_bar/tab_bar.dart';
 import 'package:ecommerce_flutter/common/widgets/custom_shapes/containers/search_container.dart';
 import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.dart';
+import 'package:ecommerce_flutter/features/shop/controllers/category_controller.dart';
 import 'package:ecommerce_flutter/features/shop/screens/all_brands/all_brands_screen.dart';
 import 'package:ecommerce_flutter/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
@@ -18,10 +19,11 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
     final dark = HelperFunctions.isDarkMode(context);
 
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: CustomAppBar(
           title: Text(
@@ -75,25 +77,17 @@ class StoreScreen extends StatelessWidget {
                 ),
                 // Tab bar
                 bottom: CategoryTabBar(
-                  tabs: [
-                    Tab(child: Text("Sports")),
-                    Tab(child: Text("Furniture")),
-                    Tab(child: Text("Electronics")),
-                    Tab(child: Text("Cloths")),
-                    Tab(child: Text("Cosmetics")),
-                  ],
+                  tabs: categories
+                      .map((category) => Tab(child: Text(category.name)))
+                      .toList(),
                 ),
               ),
             ];
           },
           body: TabBarView(
-            children: [
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-              CategoryTab(),
-            ],
+            children: categories
+                .map((category) => CategoryTab(category: category))
+                .toList(),
           ),
         ),
       ),

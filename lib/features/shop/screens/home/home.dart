@@ -2,7 +2,9 @@ import 'package:ecommerce_flutter/common/widgets/app_bar/appbar.dart';
 import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommerce_flutter/features/personalization/controllers/user_controller.dart';
+import 'package:ecommerce_flutter/features/shop/controllers/category_controller.dart';
 import 'package:ecommerce_flutter/features/shop/screens/all_products/all_products_screen.dart';
+import 'package:ecommerce_flutter/features/shop/screens/home/widgets/category_shimmer.dart';
 import 'package:ecommerce_flutter/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
@@ -96,21 +98,38 @@ class HomeCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 6,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) {
-          return VerticalImageText(
-            image: ImageStrings.shoeIcon,
-            title: "Shoes",
-            onTap: () => Get.to(() => const SubCategories()),
-          );
-        },
-      ),
-    );
+    final categoryController = Get.put(CategoryController());
+    return Obx(() {
+      if (categoryController.isLoading.value) return CategoryShimmer();
+      if (categoryController.featuredCategories.isEmpty) {
+        return Center(
+          child: Text(
+            "No Data Found",
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.apply(color: Colors.white),
+          ),
+        );
+      }
+      return SizedBox(
+        height: 80,
+        child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: categoryController.featuredCategories.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (_, __) =>
+              const SizedBox(width: Sizes.spaceBtwItems),
+          itemBuilder: (_, index) {
+            final category = categoryController.featuredCategories[index];
+            return VerticalImageText(
+              image: category.image,
+              title: category.name,
+              onTap: () => Get.to(() => const SubCategories()),
+            );
+          },
+        ),
+      );
+    });
   }
 }
 

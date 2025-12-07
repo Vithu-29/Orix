@@ -33,8 +33,6 @@ Future<void> main() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
-  debugPrint('SUPABASE_URL: ${dotenv.env["SUPABASE_URL"]}');
-  debugPrint('SUPABASE_ANON_KEY: ${dotenv.env["SUPABASE_ANON_KEY"]}');
 
   runApp(const MainApp());
 }

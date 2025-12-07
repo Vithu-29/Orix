@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/common/widgets/image_shapes/circular_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -10,6 +11,7 @@ class VerticalImageText extends StatelessWidget {
     required this.image,
     required this.title,
     this.textColor = ColorsScheme.white,
+    this.isNetworkImage = true,
     this.backgroundColor,
     this.onTap,
   });
@@ -18,6 +20,7 @@ class VerticalImageText extends StatelessWidget {
   final Color textColor;
   final Color? backgroundColor;
   final void Function()? onTap;
+  final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -25,43 +28,30 @@ class VerticalImageText extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(right: Sizes.spaceBtwItems),
-        child: Column(
-          children: [
-            Container(
-              width: 56,
-              height: 56,
-              padding: EdgeInsets.all(Sizes.sm),
-              decoration: BoxDecoration(
-                color:
-                    backgroundColor ??
-                    (dark ? ColorsScheme.black : ColorsScheme.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  color: dark ? ColorsScheme.light : ColorsScheme.dark,
-                ),
-              ),
+      child: Column(
+        children: [
+          CircularImage(
+            image: image,
+            fit: BoxFit.fitWidth,
+            padding: Sizes.sm * 1.4,
+            isNetworkImage: isNetworkImage,
+            backgroundColor: backgroundColor,
+            overlayColor: dark ? ColorsScheme.light : ColorsScheme.dark,
+          ),
+          //Text
+          const SizedBox(height: Sizes.spaceBtwItems / 2),
+          SizedBox(
+            width: 55,
+            child: Text(
+              title,
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium!.apply(color: ColorsScheme.white),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            //Text
-            const SizedBox(height: Sizes.spaceBtwItems / 2),
-            SizedBox(
-              width: 55,
-              child: Text(
-                title,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium!.apply(color: ColorsScheme.white),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

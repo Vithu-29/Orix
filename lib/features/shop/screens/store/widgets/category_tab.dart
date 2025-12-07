@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.dart';
+import 'package:ecommerce_flutter/features/shop/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../common/widgets/brands/brand_showcase.dart';
@@ -8,7 +9,8 @@ import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 
 class CategoryTab extends StatelessWidget {
-  const CategoryTab({super.key});
+  final CategoryModel category;
+  const CategoryTab({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class CategoryTab extends StatelessWidget {
                 itemCount: 4,
                 itemBuilder: (_, index) => ProductCardVertical(),
               ),
-              const SizedBox(height: Sizes.spaceBtwSections,)
+              const SizedBox(height: Sizes.spaceBtwSections),
             ],
           ),
         ),
