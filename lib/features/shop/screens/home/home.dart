@@ -7,7 +7,6 @@ import 'package:ecommerce_flutter/features/shop/screens/all_products/all_product
 import 'package:ecommerce_flutter/features/shop/screens/home/widgets/category_shimmer.dart';
 import 'package:ecommerce_flutter/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
-import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
@@ -65,13 +64,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(Sizes.defaultSpace),
               child: Column(
                 children: [
-                  PromoSlider(
-                    banners: [
-                      ImageStrings.promoBanner1,
-                      ImageStrings.promoBanner2,
-                      ImageStrings.promoBanner3,
-                    ],
-                  ),
+                  PromoSlider(),
                   const SizedBox(height: Sizes.spaceBtwSections),
                   //Popular products
                   SectionHeading(
