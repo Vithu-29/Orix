@@ -110,17 +110,17 @@ class ProductModel {
     return ProductModel(
       id: document.id,
       sku: data['SKU'] ?? '',
-      stock: data['Stock'] ?? 0,
-      price: double.parse((data['Price'] ?? 0.0).toString()),
       title: data['Title'],
+      stock: data['Stock'] ?? 0,
+      isFeatured: data['IsFeatured'] ?? false,
+      price: double.parse((data['Price'] ?? 0.0).toString()),
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
       thumbnail: data['Thumbnail'] ?? '',
-      isFeatured: data['IsFeatured'] ?? false,
-      brand: BrandModel.fromJson(data['Brand']),
-      description: data['Description'] ?? '',
       categoryId: data['CategoryId'] ?? '',
-      images: data['Images'] != null ? List<String>.from(data['Images']) : [],
+      description: data['Description'] ?? '',
       productType: data['ProductType'] ?? '',
+      brand: BrandModel.fromJson(data['Brand']),
+      images: data['Images'] != null ? List<String>.from(data['Images']) : [],
       productAttributes: (data['ProductAttributes'] as List<dynamic>)
           .map((e) => ProductAttributeModel.fromJson(e))
           .toList(),

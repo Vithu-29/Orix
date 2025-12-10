@@ -14,11 +14,13 @@ class BrandProductsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(Sizes.defaultSpace),
-          child: Column(children: [
-            BrandCard(showBorder: true,),
-            const SizedBox(height: Sizes.spaceBtwItems,),
-            SortableProducts(),
-          ]),
+          child: Column(
+            children: [
+              BrandCard(showBorder: true),
+              const SizedBox(height: Sizes.spaceBtwItems),
+              SortableProducts(products: []),
+            ],
+          ),
         ),
       ),
     );
