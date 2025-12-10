@@ -3,8 +3,10 @@ import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommerce_flutter/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce_flutter/features/shop/controllers/category_controller.dart';
+import 'package:ecommerce_flutter/features/shop/controllers/product_controller.dart';
 import 'package:ecommerce_flutter/features/shop/screens/all_products/all_products_screen.dart';
 import 'package:ecommerce_flutter/features/shop/screens/home/widgets/category_shimmer.dart';
+import 'package:ecommerce_flutter/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
 import 'package:ecommerce_flutter/features/shop/screens/sub_categories/sub_categories.dart';
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
@@ -24,6 +26,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -66,16 +69,34 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   PromoSlider(),
                   const SizedBox(height: Sizes.spaceBtwSections),
+
                   //Popular products
                   SectionHeading(
                     title: "Popular Products",
                     onPressed: () => Get.to(() => const AllProductsScreen()),
                   ),
                   const SizedBox(height: Sizes.spaceBtwItems),
-                  GridLayout(
-                    itemCount: 6,
-                    itemBuilder: (_, index) => const ProductCardVertical(),
-                  ),
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return VerticalProductShimmer(
+                        itemCount: controller.featuredProducts.length,
+                      );
+                    }
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          "No Data Found",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
+                    return GridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => ProductCardVertical(
+                        product: controller.featuredProducts[index],
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),

@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
+import '../../../../features/shop/models/product_model.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../layouts/grid_layout.dart';
 import '../product_cards/product_card_vertical.dart';
 
 class SortableProducts extends StatelessWidget {
-  const SortableProducts({
-    super.key,
-  });
+  const SortableProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         DropdownButtonFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Iconsax.sort_copy),
-          ),
+          decoration: InputDecoration(prefixIcon: Icon(Iconsax.sort_copy)),
           items:
               [
                     'Name',
@@ -28,10 +25,8 @@ class SortableProducts extends StatelessWidget {
                     'Popularity',
                   ]
                   .map(
-                    (option) => DropdownMenuItem(
-                      value: option,
-                      child: Text(option),
-                    ),
+                    (option) =>
+                        DropdownMenuItem(value: option, child: Text(option)),
                   )
                   .toList(),
           onChanged: (value) {},
@@ -39,7 +34,8 @@ class SortableProducts extends StatelessWidget {
         const SizedBox(height: Sizes.spaceBtwSections),
         GridLayout(
           itemCount: 6,
-          itemBuilder: (_, index) => ProductCardVertical(),
+          itemBuilder: (_, index) =>
+              ProductCardVertical(product: ProductModel.empty()),
         ),
       ],
     );

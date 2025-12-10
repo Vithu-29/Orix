@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 
+import '../../models/product_model.dart';
+
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
 
@@ -33,8 +35,9 @@ class WishlistScreen extends StatelessWidget {
           child: Column(
             children: [
               GridLayout(
-                itemCount: 7,
-                itemBuilder: (_, index) => ProductCardVertical(),
+                itemCount: 6,
+                itemBuilder: (_, index) =>
+                    ProductCardVertical(product: ProductModel.empty()),
               ),
             ],
           ),

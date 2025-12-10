@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.dart';
+import 'package:ecommerce_flutter/features/shop/models/product_model.dart';
 import 'package:ecommerce_flutter/features/shop/screens/checkout/checkout_screen.dart';
 import 'package:ecommerce_flutter/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:ecommerce_flutter/features/shop/screens/product_details/widgets/product_attributes.dart';
@@ -12,7 +13,8 @@ import 'widgets/detail_product_slider.dart';
 import 'widgets/rating_and_share_buton.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  final ProductModel product;
+  const ProductDetailScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

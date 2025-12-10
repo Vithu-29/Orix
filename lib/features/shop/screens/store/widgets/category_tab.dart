@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../../common/widgets/brands/brand_showcase.dart';
 import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
+import '../../../models/product_model.dart';
 
 class CategoryTab extends StatelessWidget {
   final CategoryModel category;
@@ -42,7 +43,8 @@ class CategoryTab extends StatelessWidget {
 
               GridLayout(
                 itemCount: 4,
-                itemBuilder: (_, index) => ProductCardVertical(),
+                itemBuilder: (_, index) =>
+                    ProductCardVertical(product: ProductModel.empty()),
               ),
               const SizedBox(height: Sizes.spaceBtwSections),
             ],
