@@ -5,130 +5,142 @@ import 'package:ecommerce_flutter/common/widgets/text_widgets/section_heading.da
 import 'package:ecommerce_flutter/utils/constants/colors.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../common/widgets/chips/choice_chip.dart';
 import '../../../../../utils/constants/sizes.dart';
+import '../../../controllers/products/variation_controller.dart';
+import '../../../models/product_model.dart';
 
 class ProductAttributes extends StatelessWidget {
-  const ProductAttributes({super.key});
+  final ProductModel product;
+  const ProductAttributes({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VariationController());
     final dark = HelperFunctions.isDarkMode(context);
-    return Column(
-      children: [
-        RoundedContainer(
-          padding: EdgeInsets.all(Sizes.md),
-          backgroundColor: dark ? ColorsScheme.darkerGrey : ColorsScheme.grey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+    return Obx(
+      () => Column(
+        children: [
+          if (controller.selectedVariation.value.id.isNotEmpty)
+            RoundedContainer(
+              padding: EdgeInsets.all(Sizes.md),
+              backgroundColor: dark
+                  ? ColorsScheme.darkerGrey
+                  : ColorsScheme.grey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SectionHeading(title: "Variation", showTextButton: false),
-                  const SizedBox(width: Sizes.spaceBtwItems),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Row(
+                      SectionHeading(title: "Variation", showTextButton: false),
+                      const SizedBox(width: Sizes.spaceBtwItems),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ProductTitleText(
-                            title: "Price",
-                            smallSize: true,
+                          Row(
+                            children: [
+                              const ProductTitleText(
+                                title: "Price",
+                                smallSize: true,
+                              ),
+                              if (controller.selectedVariation.value.salePrice >
+                                  0)
+                                Text(
+                                  '\$${controller.selectedVariation.value.price}',
+                                  style: Theme.of(context).textTheme.titleSmall!
+                                      .apply(
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                ),
+                              const SizedBox(width: Sizes.spaceBtwItems),
+                              ProductPriceText(
+                                price: controller.getVariationPrice(),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "\$25",
-                            style: Theme.of(context).textTheme.titleSmall!
-                                .apply(decoration: TextDecoration.lineThrough),
-                          ),
-                          const SizedBox(width: Sizes.spaceBtwItems),
-                          ProductPriceText(price: "20"),
-                        ],
-                      ),
 
-                      Row(
-                        children: [
-                          const ProductTitleText(
-                            title: "Stock : ",
-                            smallSize: true,
-                          ),
-                          Text(
-                            "In Stock",
-                            style: Theme.of(context).textTheme.titleMedium,
+                          Row(
+                            children: [
+                              const ProductTitleText(
+                                title: "Stock : ",
+                                smallSize: true,
+                              ),
+                              Text(
+                                controller.variationStockStatus.value,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
+                  //variation description
+                  ProductTitleText(
+                    title:
+                        controller.selectedVariation.value.description ??
+                        'No description available for this variation.',
+                    smallSize: true,
+                    maxLines: 4,
+                  ),
                 ],
               ),
-              //variation description
-              ProductTitleText(
-                title: "This is the description of the product and this can go up to maximum 4 lines ",
-                smallSize: true,
-                maxLines: 4,
-              ),
-            ],
+            ),
+
+          const SizedBox(height: Sizes.spaceBtwItems),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: product.productAttributes!
+                .map(
+                  (attribute) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SectionHeading(
+                        title: attribute.name ?? '',
+                        showTextButton: false,
+                      ),
+                      SizedBox(height: Sizes.spaceBtwItems / 2),
+                      Obx(
+                        () => Wrap(
+                          spacing: 8,
+                          children: attribute.values!.map((attributeValue) {
+                            final isSelected =
+                                controller.selectedAttributes[attribute.name] ==
+                                attributeValue;
+                            final available = controller
+                                .getAttributesAvailabilityInVariation(
+                                  product.productVariations!,
+                                  attribute.name!,
+                                )
+                                .contains(attributeValue);
+                            return ProductChoiceChip(
+                              text: attributeValue,
+                              selected: isSelected,
+                              onSelected: available
+                                  ? (selected) {
+                                      if (selected && available) {
+                                        controller.onAttributeSelected(
+                                          product,
+                                          attribute.name ?? '',
+                                          attributeValue,
+                                        );
+                                      }
+                                    }
+                                  : null,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                .toList(),
           ),
-        ),
-
-        const SizedBox(height: Sizes.spaceBtwItems),
-
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SectionHeading(title: "Colors",showTextButton: false,),
-            SizedBox(height: Sizes.spaceBtwItems / 2),
-            Wrap(
-              spacing: 8,
-              children: [
-                ProductChoiceChip(
-                  text: 'Green',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                ProductChoiceChip(
-                  text: 'Red',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                ProductChoiceChip(
-                  text: 'Blue',
-                  selected: true,
-                  onSelected: (value) {},
-                ),
-              ],
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SectionHeading(title: "Size",showTextButton: false,),
-            SizedBox(height: Sizes.spaceBtwItems / 2),
-            Wrap(
-              spacing: 8,
-              children: [
-                ProductChoiceChip(
-                  text: 'EU 34',
-                  selected: true,
-                  onSelected: (value) {},
-                ),
-                ProductChoiceChip(
-                  text: 'EU 36',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-                ProductChoiceChip(
-                  text: 'EU 38',
-                  selected: false,
-                  onSelected: (value) {},
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

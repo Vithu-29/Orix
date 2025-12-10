@@ -11,7 +11,7 @@ import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import '../../../../features/shop/controllers/product_controller.dart';
+import '../../../../features/shop/controllers/products/product_controller.dart';
 import '../../../../utils/constants/enums.dart';
 import '../../icons/circular_icon.dart';
 

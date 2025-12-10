@@ -9,6 +9,7 @@ import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+import '../../../../utils/constants/enums.dart';
 import 'widgets/detail_product_slider.dart';
 import 'widgets/rating_and_share_buton.dart';
 
@@ -18,15 +19,13 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final dark = HelperFunctions.isDarkMode(context);
-
     return Scaffold(
       bottomNavigationBar: BottomAddToCart(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             //product image slider
-            DetailProductSlider(),
+            DetailProductSlider(product: product),
 
             //product details
             Padding(
@@ -41,11 +40,13 @@ class ProductDetailScreen extends StatelessWidget {
                   RatingAndShareButton(),
 
                   //price , title, stock & brand
-                  ProductMetaData(),
+                  ProductMetaData(product: product),
 
                   //Attributes
-                  ProductAttributes(),
-                  const SizedBox(height: Sizes.spaceBtwSections),
+                  if (product.productType == ProductType.variable.toString())
+                    ProductAttributes(product: product),
+                  if (product.productType == ProductType.variable.toString())
+                    const SizedBox(height: Sizes.spaceBtwSections),
                   //Checkout
                   SizedBox(
                     width: double.infinity,
@@ -59,7 +60,7 @@ class ProductDetailScreen extends StatelessWidget {
                   SectionHeading(title: "Description", showTextButton: false),
                   const SizedBox(height: Sizes.spaceBtwItems),
                   ReadMoreText(
-                    "This is the description of the product , using readmore package in flutter , here you can setup num of lines and trim mode like some properties etc.",
+                    product.description ?? 'No description available.',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: "Show more",
