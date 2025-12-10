@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/common/widgets/brands/brand_card.dart';
 import 'package:flutter/material.dart';
 
+import '../../../features/shop/models/brand_model.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
@@ -21,8 +22,8 @@ class BrandShowCase extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: Sizes.spaceBtwItems),
       child: Column(
         children: [
-          BrandCard(showBorder: false),
-          const SizedBox(height: Sizes.spaceBtwItems,),
+          BrandCard(showBorder: false, brand: BrandModel.empty()),
+          const SizedBox(height: Sizes.spaceBtwItems),
           Row(
             children: images
                 .map((image) => brandTopProductImageWidget(image, context))

@@ -55,25 +55,26 @@ class ProductCardVertical extends StatelessWidget {
                     ),
                   ),
 
-                  Positioned(
-                    top: 12,
-                    child: RoundedContainer(
-                      radius: Sizes.sm,
-                      backgroundColor: ColorsScheme.secondary.withValues(
-                        alpha: 0.8,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Sizes.sm,
-                        vertical: Sizes.xs,
-                      ),
-                      child: Text(
-                        "$salePercentage%",
-                        style: Theme.of(context).textTheme.labelLarge!.apply(
-                          color: ColorsScheme.black,
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 12,
+                      child: RoundedContainer(
+                        radius: Sizes.sm,
+                        backgroundColor: ColorsScheme.secondary.withValues(
+                          alpha: 0.8,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Sizes.sm,
+                          vertical: Sizes.xs,
+                        ),
+                        child: Text(
+                          "$salePercentage%",
+                          style: Theme.of(context).textTheme.labelLarge!.apply(
+                            color: ColorsScheme.black,
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
                   Positioned(
                     top: 0,

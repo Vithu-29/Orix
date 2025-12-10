@@ -47,7 +47,7 @@ class BrandModel {
         name: data['Name'] ?? '',
         image: data['Image'] ?? '',
         isFeatured: data['IsFeatured'] ?? false,
-        productCount: int.parse((data['ProductCount'] ?? 0).toString()),
+        productCount: data['ProductCount'] ?? '',
       );
     } else {
       return BrandModel.empty();

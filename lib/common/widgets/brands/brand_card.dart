@@ -1,17 +1,23 @@
+import 'package:ecommerce_flutter/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
 import '../custom_shapes/containers/rounded_container.dart';
 import '../image_shapes/circular_image.dart';
 
 class BrandCard extends StatelessWidget {
-  const BrandCard({super.key, this.showBorder = true, this.onTap});
+  const BrandCard({
+    super.key,
+    this.showBorder = true,
+    this.onTap,
+    required this.brand,
+  });
 
   final bool showBorder;
   final void Function()? onTap;
+  final BrandModel brand;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +33,8 @@ class BrandCard extends StatelessWidget {
           children: [
             Flexible(
               child: CircularImage(
-                isNetworkImage: false,
-                image: ImageStrings.clothIcon,
+                isNetworkImage: true,
+                image: brand.image,
                 backgroundColor: Colors.transparent,
                 overlayColor: dark ? ColorsScheme.white : ColorsScheme.black,
               ),
@@ -43,11 +49,13 @@ class BrandCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        "Nike",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.titleLarge,
+                      Flexible(
+                        child: Text(
+                          brand.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
                       ),
                       const SizedBox(width: Sizes.xs),
                       Icon(
@@ -58,7 +66,7 @@ class BrandCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "256 products",
+                    "${brand.productCount ?? 0} products",
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
