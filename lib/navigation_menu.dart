@@ -63,4 +63,7 @@ class NavigationController extends GetxController {
     const WishlistScreen(),
     const SettingsScreen(),
   ];
+  void changeTab(int index) {
+    selectedIndex.value = index;
+  }
 }

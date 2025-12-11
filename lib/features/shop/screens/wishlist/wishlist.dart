@@ -4,7 +4,6 @@ import 'package:ecommerce_flutter/common/widgets/layouts/grid_layout.dart';
 import 'package:ecommerce_flutter/common/widgets/loaders/animation_loader.dart';
 import 'package:ecommerce_flutter/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:ecommerce_flutter/features/shop/screens/home/widgets/vertical_product_shimmer.dart';
-import 'package:ecommerce_flutter/features/shop/screens/store/store.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:ecommerce_flutter/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class WishlistScreen extends StatelessWidget {
         actions: [
           CircularIcon(
             icon: Iconsax.add_copy,
-            onPressed: () => Get.to(() => const StoreScreen()),
+            onPressed: () => NavigationController.instance.changeTab(1),
           ),
         ],
       ),
@@ -49,7 +48,8 @@ class WishlistScreen extends StatelessWidget {
                       animation: ImageStrings.pencilAnimation,
                       showAction: true,
                       actionText: 'Let\'s add some',
-                      onActionPressed: () => Get.off(const NavigationMenu()),
+                      onActionPressed: () =>
+                          NavigationController.instance.changeTab(0),
                     );
 
                     const loader = VerticalProductShimmer(itemCount: 6);
