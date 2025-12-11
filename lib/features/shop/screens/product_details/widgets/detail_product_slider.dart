@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_flutter/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:ecommerce_flutter/features/shop/controllers/products/images_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../../../../common/widgets/app_bar/appbar.dart';
 import '../../../../../common/widgets/custom_shapes/curved_edges/curved_edged_widget.dart';
-import '../../../../../common/widgets/icons/circular_icon.dart';
 import '../../../../../common/widgets/image_shapes/rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
@@ -90,7 +89,7 @@ class DetailProductSlider extends StatelessWidget {
             //Appbar icons
             CustomAppBar(
               showBackArrow: true,
-              actions: [CircularIcon(icon: Iconsax.heart, color: Colors.red)],
+              actions: [FavouriteIcon(productId: product.id)],
             ),
           ],
         ),

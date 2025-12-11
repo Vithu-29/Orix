@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,13 +10,14 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../custom_shapes/containers/rounded_container.dart';
-import '../../icons/circular_icon.dart';
 import '../../image_shapes/rounded_image.dart';
 import '../../text_widgets/product_price_text.dart';
 import '../../text_widgets/product_title_text.dart';
 
 class ProductCardHorizontal extends StatelessWidget {
-  const ProductCardHorizontal({super.key});
+  const ProductCardHorizontal({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,7 @@ class ProductCardHorizontal extends StatelessWidget {
                   Positioned(
                     top: 0,
                     right: 0,
-                    child: CircularIcon(icon: Iconsax.heart, color: Colors.red),
+                    child: FavouriteIcon(productId: product.id),
                   ),
                 ],
               ),

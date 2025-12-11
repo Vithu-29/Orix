@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter/common/styles/shadows.dart';
 import 'package:ecommerce_flutter/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce_flutter/common/widgets/image_shapes/rounded_image.dart';
+import 'package:ecommerce_flutter/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/product_price_text.dart';
 import 'package:ecommerce_flutter/common/widgets/text_widgets/product_title_text.dart';
 import 'package:ecommerce_flutter/features/shop/models/product_model.dart';
@@ -13,7 +14,6 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../../../features/shop/controllers/products/product_controller.dart';
 import '../../../../utils/constants/enums.dart';
-import '../../icons/circular_icon.dart';
 
 class ProductCardVertical extends StatelessWidget {
   final ProductModel product;
@@ -84,7 +84,7 @@ class ProductCardVertical extends StatelessWidget {
                   Positioned(
                     top: 0,
                     right: 0,
-                    child: CircularIcon(icon: Iconsax.heart, color: Colors.red),
+                    child: FavouriteIcon(productId: product.id),
                   ),
                 ],
               ),

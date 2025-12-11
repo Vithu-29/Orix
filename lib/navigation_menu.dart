@@ -17,6 +17,7 @@ class NavigationMenu extends StatelessWidget {
     final darkMode = HelperFunctions.isDarkMode(context);
 
     return Scaffold(
+      extendBody: true,
       bottomNavigationBar: Obx(
         () => NavigationBar(
           height: 80,
@@ -54,6 +55,7 @@ class NavigationMenu extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
+  static NavigationController get instance => Get.find();
   final Rx<int> selectedIndex = 0.obs;
   final screens = [
     const HomeScreen(),

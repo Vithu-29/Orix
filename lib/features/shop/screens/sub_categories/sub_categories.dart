@@ -6,6 +6,8 @@ import 'package:ecommerce_flutter/utils/constants/image_strings.dart';
 import 'package:ecommerce_flutter/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/product_model.dart';
+
 class SubCategories extends StatelessWidget {
   const SubCategories({super.key});
 
@@ -38,7 +40,8 @@ class SubCategories extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       separatorBuilder: (context, index) =>
                           SizedBox(width: Sizes.spaceBtwItems),
-                      itemBuilder: (context, index) => ProductCardHorizontal(),
+                      itemBuilder: (context, index) =>
+                          ProductCardHorizontal(product: ProductModel.empty()),
                     ),
                   ),
                 ],
