@@ -151,6 +151,11 @@ class ProductRepository extends GetxController {
           .map((doc) => doc['productId'] as String)
           .toList();
 
+      //If no productIds, skip fetching Products and return empty
+      if (productIds.isEmpty) {
+        return []; // Category has no products
+      }
+
       // Query to get all documents where the brandId is in the list of brandIds, FieldPath.documentId to query documents in Collection
       final productsQuery = await _db
           .collection('Products')
