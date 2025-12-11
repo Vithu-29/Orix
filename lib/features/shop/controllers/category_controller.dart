@@ -2,7 +2,9 @@ import 'package:ecommerce_flutter/data/repositories/categories/category_reposito
 import 'package:ecommerce_flutter/features/shop/models/category_model.dart';
 import 'package:get/get.dart';
 
+import '../../../data/repositories/products/product_repository.dart';
 import '../../../utils/popups/loaders.dart';
+import '../models/product_model.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();
@@ -50,4 +52,15 @@ class CategoryController extends GetxController {
   //load selected category data
 
   //Get category or sub category products
+  Future<List<ProductModel>> getCategoryProducts({
+    required String categoryId,
+    int limit = 4,
+  }) async {
+    // Fetch limited (4) products against each subCategory;
+    final products = await ProductRepository.instance.getProductsForCategory(
+      categoryId: categoryId,
+      limit: limit,
+    );
+    return products;
+  }
 }

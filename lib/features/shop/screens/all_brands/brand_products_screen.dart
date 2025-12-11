@@ -17,7 +17,7 @@ class BrandProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = BrandController.instance;
-    final future = controller.getBrandProducts(brand.id);
+    final future = controller.getBrandProducts(brandId: brand.id);
     return Scaffold(
       appBar: CustomAppBar(title: Text(brand.name), showBackArrow: true),
       body: SingleChildScrollView(

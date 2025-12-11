@@ -40,7 +40,7 @@ class AllBrandsScreen extends StatelessWidget {
                 }
                 return GridLayout(
                   itemCount: controller.allBrands.length,
-                  mainAxisExtent: 80,
+                  mainAxisExtent: 70,
                   itemBuilder: (_, index) {
                     final brand = controller.allBrands[index];
                     return BrandCard(

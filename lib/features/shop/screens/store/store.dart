@@ -46,7 +46,7 @@ class StoreScreen extends StatelessWidget {
                 pinned: true,
                 floating: true,
                 backgroundColor: dark ? Colors.black : ColorsScheme.white,
-                expandedHeight: 440,
+                expandedHeight: 420,
 
                 flexibleSpace: Padding(
                   padding: EdgeInsets.all(Sizes.defaultSpace),
@@ -76,7 +76,7 @@ class StoreScreen extends StatelessWidget {
                         if (brandController.featuredBrands.isEmpty) {
                           return Center(
                             child: Text(
-                              "No Data Found",
+                              "No Products Found",
                               style: Theme.of(context).textTheme.bodyMedium!
                                   .apply(color: Colors.white),
                             ),
@@ -84,7 +84,7 @@ class StoreScreen extends StatelessWidget {
                         }
                         return GridLayout(
                           itemCount: 4,
-                          mainAxisExtent: 80,
+                          mainAxisExtent: 70,
                           itemBuilder: (_, index) {
                             final brand = brandController.featuredBrands[index];
                             return BrandCard(

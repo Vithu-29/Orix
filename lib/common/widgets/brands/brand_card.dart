@@ -28,18 +28,19 @@ class BrandCard extends StatelessWidget {
       child: RoundedContainer(
         showBorder: showBorder,
         backgroundColor: Colors.transparent,
+        padding: const EdgeInsets.all(Sizes.sm),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Flexible(
-              child: CircularImage(
-                isNetworkImage: true,
-                image: brand.image,
-                backgroundColor: Colors.transparent,
-                overlayColor: dark ? ColorsScheme.white : ColorsScheme.black,
-              ),
+            CircularImage(
+              width: 40,
+              height: 40,
+              isNetworkImage: true,
+              image: brand.image,
+              backgroundColor: Colors.transparent,
+              overlayColor: dark ? ColorsScheme.white : ColorsScheme.black,
             ),
-            const SizedBox(width: Sizes.xs),
+            const SizedBox(width: Sizes.spaceBtwItems / 2),
 
             //Text
             Expanded(

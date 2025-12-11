@@ -17,7 +17,12 @@ import '../../icons/circular_icon.dart';
 
 class ProductCardVertical extends StatelessWidget {
   final ProductModel product;
-  const ProductCardVertical({super.key, required this.product});
+  final bool isNetworkImage;
+  const ProductCardVertical({
+    super.key,
+    required this.product,
+    this.isNetworkImage = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class ProductCardVertical extends StatelessWidget {
                     child: RoundedImage(
                       imageUrl: product.thumbnail,
                       applyImageRadius: true,
-                      isNetworkImage: true,
+                      isNetworkImage: isNetworkImage,
                     ),
                   ),
 
