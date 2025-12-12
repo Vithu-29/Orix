@@ -90,7 +90,7 @@ class VariationController extends GetxController {
   //reset selected attributes and variation when switching between products
   void resetVariationSelection() {
     selectedAttributes.clear();
-    selectedVariation.value = ProductVariationModel.empty();
     variationStockStatus.value = '';
+    selectedVariation.value = ProductVariationModel.empty();
   }
 }

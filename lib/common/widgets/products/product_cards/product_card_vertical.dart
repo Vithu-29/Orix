@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../../../features/shop/controllers/products/product_controller.dart';
 import '../../../../utils/constants/enums.dart';
+import 'widgets/product_card_add_to_button.dart';
 
 class ProductCardVertical extends StatelessWidget {
   final ProductModel product;
@@ -149,22 +150,8 @@ class ProductCardVertical extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: ColorsScheme.dark,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(Sizes.cardRadiusMd),
-                      bottomRight: Radius.circular(Sizes.productImageRadius),
-                    ),
-                  ),
-                  child: SizedBox(
-                    width: Sizes.iconLg * 1.2,
-                    height: Sizes.iconLg * 1.2,
-                    child: Center(
-                      child: Icon(Iconsax.add, color: ColorsScheme.white),
-                    ),
-                  ),
-                ),
+                //Add to cart container
+                ProductCardAddToCartButton(product: product),
               ],
             ),
           ],

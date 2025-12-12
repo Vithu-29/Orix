@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/common/widgets/products/favourite_icon/favourite_icon.dart';
+import 'package:ecommerce_flutter/common/widgets/products/product_cards/widgets/product_card_add_to_button.dart';
 import 'package:ecommerce_flutter/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -152,24 +153,7 @@ class ProductCardHorizontal extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ColorsScheme.dark,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(Sizes.cardRadiusMd),
-                            bottomRight: Radius.circular(
-                              Sizes.productImageRadius,
-                            ),
-                          ),
-                        ),
-                        child: SizedBox(
-                          width: Sizes.iconLg * 1.2,
-                          height: Sizes.iconLg * 1.2,
-                          child: Center(
-                            child: Icon(Iconsax.add, color: ColorsScheme.white),
-                          ),
-                        ),
-                      ),
+                      ProductCardAddToCartButton(product: product),
                     ],
                   ),
                 ],
