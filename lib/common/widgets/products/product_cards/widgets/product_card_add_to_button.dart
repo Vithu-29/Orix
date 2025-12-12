@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/features/shop/screens/product_details/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -21,7 +22,9 @@ class ProductCardAddToCartButton extends StatelessWidget {
         if (product.productType == ProductType.single.toString()) {
           final cartItem = cartController.convertToCartItem(product, 1);
           cartController.addOneToCart(cartItem);
-        } else {}
+        } else {
+          Get.to(() => ProductDetailScreen(product: product));
+        }
       },
       child: Obx(() {
         final productQuantityInCart = cartController.getProductQuantityInCart(

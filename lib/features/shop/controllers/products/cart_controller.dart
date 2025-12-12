@@ -212,8 +212,27 @@ class CartController extends GetxController {
         Loaders.customToast(message: 'Product removed from the Cart.');
         Get.back();
       },
-      onCancel: () =>
-          () => Get.back(),
+      onCancel: () => Get.back(),
     );
+  }
+
+  // Initialize already added Item's Count in the cart.
+  void updateAlreadyAddedProductCount(ProductModel product) {
+    // If product has no variations then calculate cartEntries and display total number.
+    // Else make default entries to 0 and show cartEntries when variation is selected.
+    if (product.productType == ProductType.single.toString()) {
+      productQuantityInCart.value = getProductQuantityInCart(product.id);
+    } else {
+      // Get selected Variation if any...
+      final variationId = variationController.selectedVariation.value.id;
+      if (variationId.isNotEmpty) {
+        productQuantityInCart.value = getVariationQuantityInCart(
+          product.id,
+          variationId,
+        );
+      } else {
+        productQuantityInCart.value = 0;
+      }
+    }
   }
 }

@@ -3,6 +3,8 @@ import 'package:ecommerce_flutter/features/shop/models/product_model.dart';
 import 'package:ecommerce_flutter/features/shop/models/product_variation_model.dart';
 import 'package:get/get.dart';
 
+import 'cart_controller.dart';
+
 class VariationController extends GetxController {
   static VariationController get instance => Get.find();
 
@@ -30,9 +32,17 @@ class VariationController extends GetxController {
       orElse: () => ProductVariationModel.empty(),
     );
 
+    //update selected image if variation has image
     if (selectedVariation.image.isNotEmpty) {
       ImagesController.instance.selectedProductImage.value =
           selectedVariation.image;
+    }
+
+    //show selected variation quantity already in cart
+    if (selectedVariation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController
+          .getVariationQuantityInCart(product.id, selectedVariation.id);
     }
 
     //assign selected variation
