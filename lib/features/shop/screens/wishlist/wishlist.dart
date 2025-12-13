@@ -12,6 +12,7 @@ import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 import '../../../../navigation_menu.dart';
 import '../../../../utils/constants/image_strings.dart';
+import '../../../../utils/device/device_utility.dart';
 import '../../controllers/favourites_controller.dart';
 
 class WishlistScreen extends StatelessWidget {
@@ -69,6 +70,11 @@ class WishlistScreen extends StatelessWidget {
                     );
                   },
                 ),
+              ),
+              SizedBox(
+                height:
+                    DeviceUtility.getBottomNavigationBarHeight() +
+                    Sizes.defaultSpace,
               ),
             ],
           ),

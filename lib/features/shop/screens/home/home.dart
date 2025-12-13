@@ -19,6 +19,7 @@ import '../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
 import '../../../../common/widgets/loaders/shimmer_effect_loader.dart';
 import '../../../../common/widgets/products/cart/cart_counter_icon.dart';
 import '../../../../common/widgets/text_widgets/section_heading.dart';
+import '../../../../utils/device/device_utility.dart';
 import 'widgets/promo_slider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -102,6 +103,11 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   }),
+                  SizedBox(
+                    height:
+                        DeviceUtility.getBottomNavigationBarHeight() +
+                        Sizes.defaultSpace,
+                  ),
                 ],
               ),
             ),

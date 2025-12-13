@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import '../../../../common/widgets/list_tile/user_profile_tile.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../../shop/screens/cart/cart_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -60,6 +61,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.shopping_cart,
                     title: "My Cart",
                     subTitle: "Add, remove products and move to checkout",
+                    onTap: () => Get.to(() => const CartScreen()),
                   ),
                   SettingsMenuTile(
                     icon: Iconsax.bag_tick,
